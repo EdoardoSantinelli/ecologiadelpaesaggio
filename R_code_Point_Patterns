@@ -1,0 +1,55 @@
+##### Codice per analisi dei Point Pattterns
+
+install.packages("ggplot2")
+install.packages("spatstat")
+library(ggplot2)
+libray("spatstat")
+
+
+setwd("/Users/edoardosantinelli/Desktop/lab")
+
+covid <- read.table("covid_agg.csv", head=T)
+
+covid <- read.table("view.php.csv", head=T)
+
+
+
+
+
+
+
+
+# las funzione per cambiare le labels=etichette
+
+plot(covid$country,covid$cases,las=0)   # parallel
+
+plot(covid$country,covid$cases,las=1)   #horizontal labels
+
+plot(covid$country,covid$cases,las=2)    #perpendicular labels
+
+plot(covid$country,covid$cases,las=3,cex.axis=0.5)    #vertical labels
+
+
+# cex.axis funzione per diminuire o aumentare la dimensione delle labels
+
+# ggplot2
+data(mpg)
+head(mpg)
+
+# Data
+# aes  (esthetics)
+# Tipo di geometria  (tipo di visualizzazione)
+ggplot(mpg,aes(x=displ,y=hwy)) + geom_point()
+ggplot(mpg,aes(x=displ,y=hwy)) + geom_line()
+ggplot(mpg,aes(x=displ,y=hwy)) + geom_polygon()
+
+# ggplot di covid
+ggplot(covid,aes(x=lon,y=lat,size=cases)) + geom_point()
+
+# Density 
+# Create dataset for spatstat
+covid <- ppp(lon,lat, c(-180,180), c(-90,90))
+
+d <- density(covid)
+plot(d)
+points(covids)
