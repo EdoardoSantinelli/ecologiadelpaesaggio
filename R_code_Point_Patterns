@@ -157,3 +157,60 @@ dT <- density(Tesippp)
 
 plot(dT)
 points(Tesippp, col="green")
+
+######### 
+
+setwd("/Users/edoardosantinelli/Desktop/lab")
+
+load("sanmarino.RData")
+
+ls()
+
+# dt= density map 
+# Tesi = dataset originale
+# tesippp = point pattern 
+
+library(spatstat)
+
+plot(dT)
+points(Tesippp, col="green")
+
+head(Tesi)
+
+marks(Tesippp) <- Tesi$Species_richness
+
+interpol <- Smooth(Tesippp)  
+
+plot(interpol)
+points(Tesippp, col="green")
+ 
+ library(rgdal)
+ 
+ sanmarino <- readOGR("San_Marino.shp")
+plot(sanmarino)
+plot(interpol, add=T)
+
+points(Tesippp, col="green")
+
+# excercise plot multiframe di densità
+plot(dT, main ="Density of points")
+points(Tesippp, col="green")
+plot(interpol, main="Estimate of species richness")
+points(Tesippp,col="green")
+
+atttach(Tesi)
+Tesippp <- ppp(Longitude, Latitude, c(12.41,12.47), c(43.9,43.95))
+dT <- density(Tesippp)
+marks(Tesippp) <- Tesi$Species_richness
+par(mfrow=c(2,1))
+
+par(mfrow=c(2,1))
+
+ # scambio righe e colonne
+
+par(mfrow=c(1,2))
+plot(dT, main="Density of points")
+points(Tesippp,col="green")
+plot(interpol, main="Estimate of species richness")
+points(Tesippp,col="green")
+
