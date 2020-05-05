@@ -68,3 +68,40 @@ after <- c(47.58, 52.42)
 
 output <- data.frame(cover, before, after)
 library(ggplot2)
+
+###### day 2
+set
+library(raster)
+load("defor.RData")
+
+
+par(mfrow=c(1,2))
+cl <- colorRampPalette(c('black','green'))(100) # 
+plot(d1c$map, col=cl)
+plot(d2c$map, col=cl)
+
+library(ggplot2)
+
+ggplot(output, aes(x=cover, y=before, color=cover)) +
+geom_bar(stat="identity", fill="white")
+
+# excercise plot the histograms of the land cover after deforastation
+
+ggplot(output, aes(x=cover, y=after, color=cover)) +
+geom_bar(stat="identity", fill="white")
+####
+install.packages("gridExtra")
+library(gridExtra)
+
+# grid.arrange(plot1, plo2, nrow=1)
+
+
+# histograms of the % cover before deforstation
+grafico1 <- ggplot(output, aes(x=cover, y=before, color=cover)) +
+geom_bar(stat="identity", fill="white")
+
+grafico2 <- ggplot(output, aes(x=cover, y=after, color=cover)) +
+geom_bar(stat="identity", fill="white")
+
+grid.arrange(grafico1, grafico2, nrow=1)
+
