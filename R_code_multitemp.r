@@ -105,3 +105,33 @@ geom_bar(stat="identity", fill="white")
 
 grid.arrange(grafico1, grafico2, nrow=1)
 
+
+library(ggplot2)
+cover <- c("Agriculture","Forest")
+before <- c(10.9,89.1)
+after <- c(48.2,51.8)
+
+ 
+
+output <- data.frame(cover,before,after)
+output
+
+library(gridExtra)
+
+grafico1 <- ggplot(output, aes(x=cover, y=before, color=cover)) +
+geom_bar(stat="identity", fill="white")
+
+grafico2 <- ggplot(output, aes(x=cover, y=after, color=cover)) +
+geom_bar(stat="identity", fill="white")
+
+grid.arrange(grafico1, grafico2, nrow = 1)
+ 
+grafico1 <- ggplot(output, aes(x=cover, y=before, color=cover)) + 
+geom_bar(stat="identity", fill="white") +
+ylim(0, 100)
+
+grafico2 <- ggplot(output, aes(x=cover, y=after, color=cover)) + 
+geom_bar(stat="identity", fill="white") +
+ylim(0, 100)
+
+grid.arrange(grafico1, grafico2, nrow = 1)
