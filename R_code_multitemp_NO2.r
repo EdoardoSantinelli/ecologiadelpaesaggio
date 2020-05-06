@@ -44,3 +44,29 @@ plot(EN11, col=cl)
 plot(EN12, col=cl)
 plot(EN13, col=cl)
 
+#### day 2
+
+setwd("/Users/edoardosantinelli/Desktop/lab")
+
+load("EN.RData")
+
+setwd("/Users/edoardosantinelli/Desktop/lab/esa_no2")
+
+
+rlist <- list.files(pattern=".png")
+
+lapply(rlist, raster)
+
+listafinale <- lapply(rlist, raster)
+
+EN <- stack(listafinale)
+
+cl <- colorRampPalette(c('red','orange','yellow'))(100)
+
+plot(EN, col=cl)
+
+## istruzioni 
+creare uan cartella
+fare una lista dei files
+importare la lista
+fare uno stack dele bande importate in una songola immagine su R
