@@ -70,3 +70,18 @@ creare uan cartella
 fare una lista dei files
 importare la lista
 fare uno stack dele bande importate in una songola immagine su R
+
+#### day 3
+set
+library (raster)
+setwd("/Users/edoardosantinelli/Desktop/lab/esa_no2")
+
+rlist <- list.files(pattern=".png")
+
+listafinale <- lapply(rlist, raster)
+EN <- stack(listafinale)
+difEN <- EN$EN_0013 - EN$EN_0001
+
+cld <- colorRampPalette(c('blue','white','red'))(100) # 
+plot(difEN, col=cld)
+
