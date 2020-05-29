@@ -7,33 +7,34 @@ CODE 1
 
 # PRIMO CODICE R ECOLOGIA DEL PAESAGGIO
 
-install.packages("sp")
-library("sp")
+install.packages("sp")                                  "install.packages" = INSTALLARE PACCHETTI
+library("sp")                                                    "library" = RICHIAMARE PACCHETTI INSTALLATI IN PRECEDENZA
+
 # require(sp) è un altro comando per far partire le librerie o pacchetti
 
-data(meuse)
-meuse
+data(meuse)                                                         "data" = RICHIAMO GRUPPO DI DATI 
 
-head(meuse)
-names(meuse)
+head(meuse)                                                        "head" = MOSTRA SOLO IL PRIMO SET DI RIGHE
 
-summary(meuse)
+names(meuse)                                                       "names" = MOSTRA IL NOME DELLE VARIABILI
 
-pairs(meuse)
+summary(meuse)                                                   "summary" = MOSTRA MIN,MAX,MEDIA,MEDIANA, 1°/3° QUARTILE
 
-pairs(~ cadmium + copper + lead , data = meuse)
+pairs(meuse)                                                       "pairs" = UTILIZZATO PER CORRELAZIONI TRA VARIABILI
+
+pairs(~ cadmium + copper + lead , data = meuse)                          ~ = LA TILDE SIGNIFICA UGUALE
  
  #  Excercise: cadium copper lead zinc 
+                                                                       
+ pairs(meuse[,3:6], col="red")                                        "col" = CAMBIAMENTO COLORE, "pch" = CAMBIAMENTO SIMBOLI GRAFICO
  
- pairs(meuse[,3:6], col="red")
+ pairs(meuse[,3:6], col="red", pch=19)                                "[ ]" = SUBSET DEI DATI CHE METTERO AL SUO INTERNO
  
- pairs(meuse[,3:6], col="red", pch=19)
+ pairs(meuse[,3:6], col="red", pch=19 , cex=3, main="Primo pairs")    "cex" = UTILIZZATO PER CAMBIARE LA DIMENSIONE DEI PUNTI
  
- pairs(meuse[,3:6], col="red", pch=19 , cex=3, main="Primo pairs")
+ panel.correlations <- function(x, y, digits=1, prefix="", cex.cor)   "main" = CAMBIAMENTO TITOLO
  
- panel.correlations <- function(x, y, digits=1, prefix="", cex.cor)
- 
-    usr <- par("usr"); on.exit(par(usr))
+    usr <- par("usr"); on.exit(par(usr))                               "par" =                         
     par(usr = c(0, 1, 0, 1))
     r1=cor(x,y,use="pairwise.complete.obs")
     r <- abs(cor(x, y,use="pairwise.complete.obs"))
