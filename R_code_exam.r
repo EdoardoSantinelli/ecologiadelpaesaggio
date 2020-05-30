@@ -34,7 +34,7 @@ pairs(~ cadmium + copper + lead , data = meuse)                          ~ = LA 
  
  panel.correlations <- function(x, y, digits=1, prefix="", cex.cor)   "main" = CAMBIAMENTO TITOLO
  
-    usr <- par("usr"); on.exit(par(usr))                               "par" =                         
+    usr <- par("usr"); on.exit(par(usr))                                                  
     par(usr = c(0, 1, 0, 1))
     r1=cor(x,y,use="pairwise.complete.obs")
     r <- abs(cor(x, y,use="pairwise.complete.obs"))
@@ -77,11 +77,15 @@ pairs(meuse [,3:6], lower.panel = panel.correlations, upper.panel = panel.smooth
 pairs(meuse[,3:6], lower.panel = panel.smoothing, upper.panel = panel.correlations, diag.panel = panel.histograms)
 
 
-plot(meuse$cadmium , meuse$copper)
+plot(meuse$cadmium , meuse$copper)                                       "$" = COLLEGA UN PEZZO DI CODICE AD UN'ALTRO ES. COLONNA E DATAFRAME
 
-attach(meuse)
+attach(meuse)                                                     "attach" = UTILIZZATO PER ALLEGARE IL DATAFRAME
 
 plot(cadmium,copper, pch=17, col="green", main="primo plot", xlab="cadmio", ylab="rame", cex.lab=2, cex=2))
+
+                                                  "plot" = FUNZIONE CHE PLOTTA I DATI CON LE CARATTERISTICHE INSERITE TRA PARENTESI 
+                                           "xlab","ylab" = CAMBIAMENTO ETICHETTA GRAFICO RISPETTIVAMENTE DELLE ASCISSE E DELLE ORDINATE                                             
+                                               "cex.lab" = UTILIZZATO PER ESAGERARE I PUNTI DELLE ASCISSE E DELLE ORDINATE
 
 #############################################################################
 #############################################################################
@@ -101,7 +105,6 @@ head(meuse)
 
 @ plot cadmium e lead
 
-# alleghiamo il database o dataframe 
 attach(meuse)
 
 plot(cadmium,lead,col="red",pch=19,cex=2)
@@ -117,11 +120,11 @@ plot(copper,zinc,pch=17,col="green",cex=2,xlab="rame",ylab="zinco")
 
 # multiframe o multipanel 
 
-par(mfrow=c(1,2))
-plot(cadmium,lead,col="red",pch=19,cex=2)
+par(mfrow=c(1,2))                                                        "par" = FUNZIONE CHE TI PERMETTE DI VISUALIZZARE PIù GRAFICI E CONFRONTARLI
+plot(cadmium,lead,col="red",pch=19,cex=2)                              "mfrow" = INDICHIAMO COME I GRAFICI DEVONO ESSERE MOSTRATI, N° RIGHE E COLONNE
 plot(copper,zinc,pch=17,col="green",cex=2)
 
-# invertiamo i grafici riga colonna in colonna riga
+# invertiamo i grafici riga colonna in colonna riga 
 
 par(mfrow=c(2,1))
 plot(cadmium,lead,col="red",pch=19,cex=2)
@@ -131,7 +134,7 @@ plot(copper,zinc,pch=17,col="green",cex=2)
 
 install.packages("GGally")
 library(GGally)
-ggpairs(meuse[,3:6])
+ggpairs(meuse[,3:6])                                             
 
 # spatial 
 
@@ -140,9 +143,8 @@ head(meuse)
 coordinates(meuse)=~x+y
 
 plot(meuse)
-#funzione spplot per plottare i dati spazialmente
 
-spplot(meuse,"zinc")
+spplot(meuse,"zinc")                                                "spplot" = FUNZIONE UTILIZZATA PER PLOTTARE SPAZIALMENTE I DATI
 
 #####################################################################################
 #####################################################################################
@@ -159,27 +161,27 @@ library(sp)
 data(meuse)
 head(meuse)
 
-# Coordinate del dataset
+# Coordinate del dataset                     
 coordinates(meuse)=~x+y
 
 # Spplot dei dati di zinco
-spplot(meuse,"zinc")
+spplot(meuse,"zinc")                                                 
 
 # Exercise: spplot dei dati di rame
 head(meuse)
 
 # un'altra possibilità per vedere i nomi delle colonne è:
 names(meuse)
-spplot(meuse,"copper")
+spplot(meuse,"copper")                                                
 
-# Bubble
+# Bubble                                                               "bubble" = PLOTTA I DATI COME DELLE BOLLE DI DIMENSIONE CHE VARIA A SECONDA DELLA LORO CONCENTRAZIONE 
 bubble(meuse,"zinc")
 
 # Exercise: bubble del rame, colorato di rosso
 bubble(meuse,"copper",col="red")
 
 # foraminiferi (Sofia), carbon capture (Marco)
-# array
+# array                                                                        
 foram <- c(10, 20, 35, 55, 67, 80)
 carbon <- c(5, 15, 30, 70, 85, 99)
 plot(foram, carbon, col="green", cex=2, pch=19)
@@ -187,9 +189,9 @@ plot(foram, carbon, col="green", cex=2, pch=19)
 # Dati dall'esterno sul covid-19
 
 # MAC
-setwd("/Users/nome_utente/Desktop/lab")
+setwd("/Users/nome_utente/Desktop/lab")                                "setwd" = SET WORKING DIRECTORY, DA INSERIRE OGNI VOLTA CHE VOGLIAMO UTILIZZARE DATI ESTERNI
 
-# leggere la tabella
+# leggere la tabella                                              "read.table" = MI PERMETTE DI LEGGERE LA TABELLA CHE HO IMPORTATO 
 covid <- read.table("covid_agg.csv",head=TRUE)
 
 #####################################################################################
@@ -206,7 +208,7 @@ libray("spatstat")
 
 setwd("/Users/edoardosantinelli/Desktop/lab")
 
-covid <- read.table("covid_agg.csv", head=T)
+covid <- read.table("covid_agg.csv", head=T)                        "<-" = RINOMINO UN CERTO ELEMENTO COSI DA RICHIAMARLO COL NOME A SINISTRA
 
 covid <- read.table("view.php.csv", head=T)
 
@@ -217,25 +219,25 @@ covid <- read.table("view.php.csv", head=T)
 
 
 
-# las funzione per cambiare le labels=etichette
+                                                                      "las" = FUNZIONE PER CAMBIARE LE LABELS (ETICHETTE)         
 
-plot(covid$country,covid$cases,las=0)   # parallel
+plot(covid$country,covid$cases,las=0)               # parallel
 
-plot(covid$country,covid$cases,las=1)   #horizontal labels
+plot(covid$country,covid$cases,las=1)               # horizontal labels
 
-plot(covid$country,covid$cases,las=2)    #perpendicular labels
+plot(covid$country,covid$cases,las=2)               # perpendicular labels
 
-plot(covid$country,covid$cases,las=3,cex.axis=0.5)    #vertical labels
+plot(covid$country,covid$cases,las=3,cex.axis=0.5)  # vertical labels
 
 
-# cex.axis funzione per diminuire o aumentare la dimensione delle labels
+                                                                  "cex.axis" = FUNZIONE PER DIMINUIRE O AUME>NTARE LA DIMENSIONE DELLE LABELS
 
 # ggplot2
 data(mpg)
 head(mpg)
 
 # Data
-# aes  (esthetics)
+                                                                      "aes" = ESTHETICS, TIPO DI GEOMETRIA VISUALIZZATA, PUNTI, LINEE o POLIGONI
 # Tipo di geometria  (tipo di visualizzazione)
 ggplot(mpg,aes(x=displ,y=hwy)) + geom_point()
 ggplot(mpg,aes(x=displ,y=hwy)) + geom_line()
@@ -249,7 +251,7 @@ ggplot(covid,aes(x=lon,y=lat,size=cases)) + geom_point()
 # Create dataset for spatstat
 covid <- ppp (lon,lat, c(-180,180), c(-90,90))
 
-d <- density(covid)
+d <- density(covid)                                                  "density" = UTILIZZATO PER PLOTTARE UN GRAFICO DI DENSITà 
 plot(d)
 points(covid)
 
@@ -261,10 +263,10 @@ ls()
 
 library(spatstat)
 
-plot(d)
-
+plot(d)    
+                                                             "colorRampPalette" = UTILIZZATO PER CAMBIARE I COLORI DELLE DIVERSE DENSITà
 # cambiare i colori delle densità (palette), creiamo l'oggetto cl che è una gamma di colori
-cl <- colorRampPalette(c('yellow','orange','red')) (100)
+cl <- colorRampPalette(c('yellow','orange','red')) (100)         
 plot(d,col=cl)
 
 # excercise
@@ -273,7 +275,7 @@ cl <- colorRampPalette(c('green','yellow','orange','red','blue')) (50)
 plot(d,col=cl)
 
 points(covids)
-coastlines <- readOGR("ne_10m_coastline.shp")
+coastlines <- readOGR("ne_10m_coastline.shp")                
 
 install.packages("rgdal")
 library(rgdal)
