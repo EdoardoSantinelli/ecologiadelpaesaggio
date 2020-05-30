@@ -86,7 +86,7 @@ plot(cadmium,copper, pch=17, col="green", main="primo plot", xlab="cadmio", ylab
                                                   "plot" = FUNZIONE CHE PLOTTA I DATI CON LE CARATTERISTICHE INSERITE TRA PARENTESI 
                                            "xlab","ylab" = CAMBIAMENTO ETICHETTA GRAFICO RISPETTIVAMENTE DELLE ASCISSE E DELLE ORDINATE                                             
                                                "cex.lab" = UTILIZZATO PER ESAGERARE I PUNTI DELLE ASCISSE E DELLE ORDINATE
-
+                                               "dev.off" = ELIMINA IL GRAFICO CORRENTE
 #############################################################################
 #############################################################################
 CODE 2
@@ -161,8 +161,8 @@ library(sp)
 data(meuse)
 head(meuse)
 
-# Coordinate del dataset                     
-coordinates(meuse)=~x+y
+# Coordinate del dataset                    
+coordinates(meuse)=~x+y                                          "coordinates()" = FUNZIONE CHE SPEIEGA AL SOFTWARE CHE ABBIAMO LE COORDINATE UGUALI A ES. X,Y
 
 # Spplot dei dati di zinco
 spplot(meuse,"zinc")                                                 
@@ -174,7 +174,7 @@ head(meuse)
 names(meuse)
 spplot(meuse,"copper")                                                
 
-# Bubble                                                               "bubble" = PLOTTA I DATI COME DELLE BOLLE DI DIMENSIONE CHE VARIA A SECONDA DELLA LORO CONCENTRAZIONE 
+# Bubble                                                               "bubble" = PLOTTA I DATI COME DELLE BOLLE DI DIMENSIONE CHE VARIA A SECONDA DELLA LORO CONCENTRAZIONE, UTILE SE SI HANNO DATI RELATIVI AD ABBONDANZE. 
 bubble(meuse,"zinc")
 
 # Exercise: bubble del rame, colorato di rosso
@@ -182,7 +182,7 @@ bubble(meuse,"copper",col="red")
 
 # foraminiferi (Sofia), carbon capture (Marco)
 # array                                                                        
-foram <- c(10, 20, 35, 55, 67, 80)
+foram <- c(10, 20, 35, 55, 67, 80)                                      "c" = UTILIZZIAMO C QUANDO DOBBIAMO ELENCARE UNA SERIE DI ELEMENTI
 carbon <- c(5, 15, 30, 70, 85, 99)
 plot(foram, carbon, col="green", cex=2, pch=19)
 
@@ -266,7 +266,8 @@ library(spatstat)
 plot(d)    
                                                              "colorRampPalette" = UTILIZZATO PER CAMBIARE I COLORI DELLE DIVERSE DENSITà
 # cambiare i colori delle densità (palette), creiamo l'oggetto cl che è una gamma di colori
-cl <- colorRampPalette(c('yellow','orange','red')) (100)         
+
+cl <- colorRampPalette(c('yellow','orange','red')) (100)         "(100)" = QUANTI LIVELLI USIAMO TRA UN COLORE E L'ALTRO DELLA PALETTE
 plot(d,col=cl)
 
 # excercise
@@ -291,7 +292,7 @@ library(rgdal) # for the coastlines
 
  setwd("~/lab/")
 load("point_pattern.RData")
-ls()
+ls()                                                        "ls()" = LISTA 
 
  cl5 <- colorRampPalette(c('cyan', 'purple', 'red')) (200) 
 plot(d, col=cl5, main="density")
@@ -303,9 +304,9 @@ plot(coastlines, add=T)
 # interpolazione
 
 head(covid)
-marks(covids) <- covid$cases
+marks(covids) <- covid$cases                                 "marks" = FUNZIONE UTILIZZATA PER ASSOCIARE UN VALORE A UNA COLONNA
 
-s <- Smooth(covids)
+s <- Smooth(covids) 
 plot(s)
 
 # Exercise: plot(s) with points and coastlines
@@ -457,7 +458,7 @@ names(p224r63_2011)
 clb <- colorRampPalette(c('dark blue','blue','light blue'))(100)
 plot(p224r63_2011$B1_sre, col=clb)
   # attach(dataframe) non funziona con il pacchetto raster
-  #simbolo che lega la colonna (la banda) al dataset (immagine satellitare) : $
+  # simbolo che lega la colonna (la banda) al dataset (immagine satellitare) : $
   
   # Exercise
 
