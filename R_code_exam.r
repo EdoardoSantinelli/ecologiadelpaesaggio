@@ -500,7 +500,7 @@ plotRGB(p224r63_2011, r=3, g=2, b=1, stretch="Lin")
 # false colours
 plotRGB(p224r63_2011, r=4, g=3, b=2, stretch="Lin")
  
- # Salvataggio                         
+ # Salvataggio                                                              "pdf()" = SALVATAGGIO GRAFICO IN PDF
 pdf("primografico.pdf") 
                           
                                                     
@@ -568,7 +568,7 @@ plot(dvi1988)
                        
   #excersie : calculate dvi for 20111                        
 dvi2011 <- p224r63_2011$B4_sre - p224r63_2011$B3_sre
-                          
+                          clo
 cldvi <- colorRampPalette(c('light blue','light green','green'))(100)
 plot(dvi2011, col=cldvi)  
                           
@@ -778,7 +778,7 @@ plotRGB(p224r63_2011, r=4, g=3, b=2, stretch="Lin", main="2011")
 dvi1988 <- p224r63_1988$B4_sre - p224r63_1988$b3_sre
 plot(dvi1988)
                        
-  #excersie : calculate dvi for 20111                        
+  #excersie : calculate dvi for 2011                        
 dvi2011 <- p224r63_2011$B4_sre - p224r63_2011$B3_sre
                           
 cldvi <- colorRampPalette(c('light blue','light green','green'))(100)
@@ -865,11 +865,11 @@ par(mfrow=c(2,1))
 plotRGB(defor1,r=1, g=2, b=3, stretch="Lin")
 plotRGB(defor2, r=1, g=2, b=3, stretch="Lin")
 
-# classificazione non supervisionata (non diamo input al pc su quali zone sono foresta o meno)
+
 library(RStoolbox)
 
 
-d1c <- unsuperClass(defor1, nClasses=2)
+d1c <- unsuperClass(defor1, nClasses=2)                     "unsuperClass" = CLASSIFICAZIONE NON SUPERVISIONATA; NON DIAMO INPUT AL PC SU QUALI ZONE SONO FORESTA O MENO.
 
 plot(d1c$map)
 cl <- colorRampPalette(c('black','green'))(100) # 
@@ -887,7 +887,7 @@ par(mfrow=c(2,1))
 plot(d1c$map, col=cl)
 plot(d2c$map, col=cl)
 
-freq(d1c$map)
+freq(d1c$map)                                       "freq" = MI INDICA LA FREQUENZA DEI VARI DATI INSERITI NEL GRAFICO, DA QUI POSSIAMO CALCOLARE LE PERCENTUALI.
 # aree aperte =35213
 # foresta = 306079
 
