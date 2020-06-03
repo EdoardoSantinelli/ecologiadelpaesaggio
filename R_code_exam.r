@@ -1099,7 +1099,7 @@ plot(snowmay, col=cl)
 setwd("/Users/edoardosantinelli/Desktop/lab/snow1")
 
 rlist <- list.files(pattern=".tif")
-lapply(rlist, raster)
+lapply(rlist, raster)                                               importazione dei singoli file tramite la funzione r applicata a tutti i file contemporaneamete mediante la funzione lapply
 list_rast <- lapply(rlist, raster)
 snow.multitemp <- stack(list_rast)
 plot(snow.multitemp,col=cl)
@@ -1187,6 +1187,66 @@ attach(output)
 
 #####################################################################################
 #####################################################################################
+CODE 11
+R code crop
+
+setwd("/Users/edoardosantinelli/Desktop/lab/snow1")
+library(raster)
+
+##excercise : upload the whole set snow (raster o lapply)
+
+
+rlist <- list.files(pattern=".tif")
+
+lapply(rlist, raster)
+
+listaimmagini <- lapply(rlist, raster)
+
+SN <- stack(listafinale)                  stack= serie multitemporale creata
+
+cl <- colorRampPalette(c('blue','light blue','white'))(100)
+
+plot(SN, col=cl)
+
+# zoom 
+
+plot(SN$snow2010r, col=cl)
+
+ext <- c( -180, 180, -90, 90)                                 estensione totale immagine
+
+
+extension <- c(6, 18, 40, 50)                                 estensione a nostra discrezione zoomando una zona
+zoom(SN$snow2010r, ext=extension)
+
+extension <- c(6, 20, 35, 50)
+zoom(SN$snow2010r, ext=extension)
+
+zoom(SN$snow2010r, ext=drawExtent())                   r aspetta un rettangolo disegnato da noi per zoommare
+
+#crop                                                 senza ext= , non è solo uno zoom ma un immagine nuova ritagliata daalla precedente
+
+extension <- c(6, 20, 35, 50)
+snow2010r.italy <- crop(SN$snow2010r, extension)
+plot(snow2010r.italy, col=cl)
+
+
+
+#excercise crop the italy extent on the whole stack of snow layers
+
+extension <- c(6, 20, 35, 50)
+snowitaly <- crop(SN, extension)
+plot(snowitaly, col=cl)
+
+mettiamo le legende uguali  zlim=
+
+plot(snowitaly, col=cl, zlim=(c(20, 200))
+
+facciamo un boxplot 
+boxplot(snowitaly, horizontal= T, vertical= F)
+
+
+ 
+
 
 1. R_code_first.r   
 2. R_code_spatial.r   
@@ -1198,7 +1258,7 @@ attach(output)
 8. R_code_multitemp_NO2.r   
 9. R_code_snow.r   
 10. R_code_patches.r 
-
+11. R_code_crop.r
 
 COPERNICUS DATA:
 https://land.copernicus.vgt.vito.be/PDF/portal/Application.html
