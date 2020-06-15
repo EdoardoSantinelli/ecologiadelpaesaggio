@@ -317,14 +317,14 @@ points(covids)
 coastlines <- readOGR("ne_10m_coastline.shp")
 plot(coastlines, add=T)
 
-text(covids)    pe vedere il numero
+text(covids)                                                     pe vedere il numero
 
 ####  mappa finale
 
 par(mfrow=c(2,1))
 
 # densità
-cl5 <- colorRampPalette(c('cyan', 'purple', 'red')) (200) 
+cl5 <- colorRampPalette(c('cyan', 'purple', 'red')) (200)      
 plot(d, col=cl5, main="density")
 points(covids)
 coastlines <- readOGR("ne_10m_coastline.shp")
@@ -340,7 +340,7 @@ plot(coastlines, add=T)
 
 ## San Marino
 
-setwd se non è stata gia fatta
+setwd se non è stata gia fatta  
 
 load("Tesi.RData")
 
@@ -457,15 +457,15 @@ names(p224r63_2011)
 
 clb <- colorRampPalette(c('dark blue','blue','light blue'))(100)
 plot(p224r63_2011$B1_sre, col=clb)
-  # attach(dataframe) non funziona con il pacchetto raster
-  # simbolo che lega la colonna (la banda) al dataset (immagine satellitare) : $
+#                                                        attach(dataframe) non funziona con il pacchetto raster
+#                                                       simbolo che lega la colonna (la banda) al dataset (immagine satellitare) : $
   
-  # Exercise
+# Exercise
 
 clnir <- colorRampPalette(c('red','orange','yellow')
 plot(p224r63_2011$B4_sre, col=clnir) 
   
-# Multiframe
+# Multiframe                                                      METTIAMO IN RISALTO IL FRAME CHE CI INTERESSA (ES. BLU, VERDE, ROSSO E INFRAROSSO)
                           
  par(mfrow=c(2,2))
 # Blue
@@ -545,7 +545,7 @@ clnir <- colorRampPalette(c('red','orange','yellow')) (100)
 plot(p224r63_1988$B4_sre, col=clnir) 
                           
                           
-dev.off()   
+dev.off()                                                         ELIMINO IL GRAFICO CHE STO VISUALIZZANDO
 
 plotRGB(p224r63_1988, r=3, g=2, b=1, stretch="Lin")                          
                           
@@ -590,7 +590,7 @@ plot(difdvi, col=cldifdvi)
                       
 # Changing the grain (resolution)
                           
-p224r63_2011lr <- aggregate(p224r63_2011, fact=10)
+p224r63_2011lr <- aggregate(p224r63_2011, fact=10)                    FACT = AUMENTO IL VALORE PER DIMINURIE LA RISOLUZIONE
                           
 
                               
@@ -618,7 +618,7 @@ plot(dvi2011lr50)
 # dvi1988 low resolution
 dvi1988lr50 <- p224r63_1988lr50$B4_sre - p224r63_1988lr50$B3_sre
 plot(dvi1988lr50) 
-# difdvi low resolution        (differenza dei due dvi a bassa risoluzione)               
+# difdvi low resolution                                              DIFFERENZA DI DUE DVI A BASSA RISOLUZIONE               
 difdvilr50 <- dvi2011lr50 - dvi1988lr50
 plot(difdvilr50,col=cldifdvi)
                           
@@ -950,7 +950,7 @@ geom_bar(stat="identity", fill="white")
 grafico2 <- ggplot(output, aes(x=cover, y=after, color=cover)) +
 geom_bar(stat="identity", fill="white")
 
-grid.arrange(grafico1, grafico2, nrow=1)
+grid.arrange(grafico1, grafico2, nrow=1)                          grid.arrange= PLOTTA I DUE GRAFICI NELLA STESSA SCHERMATA, CON nrow decido se su una stessa riga 
 
 
 library(ggplot2)
@@ -1042,23 +1042,17 @@ load("EN.RData")
 setwd("/Users/edoardosantinelli/Desktop/lab/esa_no2")
 
 
-rlist <- list.files(pattern=".png")
+rlist <- list.files(pattern=".png")                        CREO UNA CARTELLA 
 
-lapply(rlist, raster)
+lapply(rlist, raster)                                      lapply = FACCIO UNA LISTA DI FILES
 
-listafinale <- lapply(rlist, raster)
+listafinale <- lapply(rlist, raster)                       IMPORTO LA LISTA
 
-EN <- stack(listafinale)
+EN <- stack(listafinale)                                   FACCIO UNO STACK DELLE BANDE IMPORTANTE IN UNA SINGOLA IMMAGINE SU R
 
 cl <- colorRampPalette(c('red','orange','yellow'))(100)
 
 plot(EN, col=cl)
-
-## istruzioni 
-creare uan cartella
-fare una lista dei files
-importare la lista
-fare uno stack dele bande importate in una songola immagine su R
 
 #### day 3
 set
@@ -1152,7 +1146,7 @@ cl <- colorRampPalette(c('black','green'))(100) #
 plot(d1c,col=cl)
 plot(d2c,col=cl)
  
- funzione CBIND : elimina alcuni valori es, agricoltura , si metonono come valori nulla ed estraiamo la foresta
+                                                         funzione CBIND : elimina alcuni valori es, agricoltura , si metonono come valori nulla ed estraiamo la foresta
 # forest: class2 , agricolture class 1
 d1c.for <- reclassify(d1c, cbind(1,NA))
 cl <- colorRampPalette(c('black','green'))(100) #
@@ -1181,8 +1175,8 @@ plot(d2c.for.patches, col=clp)
 # max patches d2 1212
 # plot results:
 time <- c("Before deforestation","After deforestation")
-npatches <- c(301,1212)
-output <- data.frame(time,npatches)
+npatches <- c(301,1212)                                        IL NUMERO DI PATCHES é DATO DAL MAX DI UNA E IL MAX DELL' ALTRA
+output <- data.frame(time,npatches)                            HO CORRELATO LE PATCH PRE E POST DEFORESTAZIONE
 attach(output)
 
 #####################################################################################
@@ -1202,7 +1196,7 @@ lapply(rlist, raster)
 
 listaimmagini <- lapply(rlist, raster)
 
-SN <- stack(listafinale)                  stack= serie multitemporale creata
+SN <- stack(listafinale)                                   stack= serie multitemporale creata
 
 cl <- colorRampPalette(c('blue','light blue','white'))(100)
 
