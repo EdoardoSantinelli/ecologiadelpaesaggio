@@ -77,9 +77,9 @@ pairs(meuse [,3:6], lower.panel = panel.correlations, upper.panel = panel.smooth
 pairs(meuse[,3:6], lower.panel = panel.smoothing, upper.panel = panel.correlations, diag.panel = panel.histograms)
 
 
-plot(meuse$cadmium , meuse$copper)                                       "$" = COLLEGA UN PEZZO DI CODICE AD UN'ALTRO ES. COLONNA E DATAFRAME
+plot(meuse$cadmium , meuse$copper)                                        "$" = COLLEGA UN PEZZO DI CODICE AD UN'ALTRO ES. COLONNA E DATAFRAME
 
-attach(meuse)                                                     "attach" = UTILIZZATO PER ALLEGARE IL DATAFRAME
+attach(meuse)                                                             "attach" = UTILIZZATO PER ALLEGARE IL DATAFRAME
 
 plot(cadmium,copper, pch=17, col="green", main="primo plot", xlab="cadmio", ylab="rame", cex.lab=2, cex=2))
 
@@ -230,7 +230,7 @@ plot(covid$country,covid$cases,las=2)               # perpendicular labels
 plot(covid$country,covid$cases,las=3,cex.axis=0.5)  # vertical labels
 
 
-                                                                  "cex.axis" = FUNZIONE PER DIMINUIRE O AUME>NTARE LA DIMENSIONE DELLE LABELS
+                                                                  "cex.axis" = FUNZIONE PER DIMINUIRE O AUMENTARE LA DIMENSIONE DELLE LABELS
 
 # ggplot2
 data(mpg)
@@ -317,7 +317,7 @@ points(covids)
 coastlines <- readOGR("ne_10m_coastline.shp")
 plot(coastlines, add=T)
 
-text(covids)                                                     pe vedere il numero
+text(covids)                                                     per vedere il numero
 
 ####  mappa finale
 
@@ -590,7 +590,7 @@ plot(difdvi, col=cldifdvi)
                       
 # Changing the grain (resolution)
                           
-p224r63_2011lr <- aggregate(p224r63_2011, fact=10)                    FACT = AUMENTO IL VALORE PER DIMINURIE LA RISOLUZIONE
+p224r63_2011lr <- aggregate(p224r63_2011, fact=10)                    "FACT" = AUMENTO IL VALORE PER DIMINURIE LA RISOLUZIONE
                           
 
                               
@@ -830,7 +830,7 @@ plot(dvi2011lr50)
 # dvi1988 low resolution
 dvi1988lr50 <- p224r63_1988lr50$B4_sre - p224r63_1988lr50$B3_sre
 plot(dvi1988lr50) 
-# difdvi low resolution        (differenza dei due dvi a bassa risoluzione)               
+# difdvi low resolution                                            (differenza dei due dvi a bassa risoluzione)               
 difdvilr50 <- dvi2011lr50 - dvi1988lr50
 plot(difdvilr50,col=cldifdvi)
                           
@@ -950,7 +950,7 @@ geom_bar(stat="identity", fill="white")
 grafico2 <- ggplot(output, aes(x=cover, y=after, color=cover)) +
 geom_bar(stat="identity", fill="white")
 
-grid.arrange(grafico1, grafico2, nrow=1)                          grid.arrange= PLOTTA I DUE GRAFICI NELLA STESSA SCHERMATA, CON nrow decido se su una stessa riga 
+grid.arrange(grafico1, grafico2, nrow=1)                          "grid.arrange" = PLOTTA I DUE GRAFICI NELLA STESSA SCHERMATA, CON nrow decido se su una stessa riga 
 
 
 library(ggplot2)
@@ -1146,7 +1146,7 @@ cl <- colorRampPalette(c('black','green'))(100) #
 plot(d1c,col=cl)
 plot(d2c,col=cl)
  
-                                                         funzione CBIND : elimina alcuni valori es, agricoltura , si metonono come valori nulla ed estraiamo la foresta
+                                                         funzione "CBIND": elimina alcuni valori es, agricoltura , si metonono come valori nulla ed estraiamo la foresta
 # forest: class2 , agricolture class 1
 d1c.for <- reclassify(d1c, cbind(1,NA))
 cl <- colorRampPalette(c('black','green'))(100) #
@@ -1196,7 +1196,7 @@ lapply(rlist, raster)
 
 listaimmagini <- lapply(rlist, raster)
 
-SN <- stack(listafinale)                                   stack= serie multitemporale creata
+SN <- stack(listafinale)                                   stack = serie multitemporale creata
 
 cl <- colorRampPalette(c('blue','light blue','white'))(100)
 
@@ -1215,9 +1215,9 @@ zoom(SN$snow2010r, ext=extension)
 extension <- c(6, 20, 35, 50)
 zoom(SN$snow2010r, ext=extension)
 
-zoom(SN$snow2010r, ext=drawExtent())                   r aspetta un rettangolo disegnato da noi per zoommare
-
-#crop                                                 senza ext= , non è solo uno zoom ma un immagine nuova ritagliata daalla precedente
+zoom(SN$snow2010r, ext=drawExtent())                          r aspetta un rettangolo disegnato da noi per zoommare
+ 
+#crop                                                         senza ext= non è solo uno zoom ma un immagine nuova ritagliata daalla precedente
 
 extension <- c(6, 20, 35, 50)
 snow2010r.italy <- crop(SN$snow2010r, extension)
