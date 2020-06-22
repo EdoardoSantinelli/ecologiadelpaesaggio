@@ -1196,7 +1196,7 @@ lapply(rlist, raster)
 
 listaimmagini <- lapply(rlist, raster)
 
-SN <- stack(listafinale)                                   stack = serie multitemporale creata
+SN <- stack(listaimmagini)                                   stack = serie multitemporale creata
 
 cl <- colorRampPalette(c('blue','light blue','white'))(100)
 
