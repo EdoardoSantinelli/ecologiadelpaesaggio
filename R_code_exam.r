@@ -97,6 +97,7 @@ plot(cadmium,copper, pch=17, col="green", main="primo plot", xlab="cadmio", ylab
 #xlab,ylab, cambiamento etichetta grafico rispettivamente delle ascisse e delle ordinate                                     
 #cex.lab, utilizzato per esagerare i punti delle ascisse e delle ordinate
 #dev.off, elimina il grafico corrente
+
 #############################################################################
 #############################################################################
 CODE 2
