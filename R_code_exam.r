@@ -7,33 +7,44 @@ CODE 1
 
 # PRIMO CODICE R ECOLOGIA DEL PAESAGGIO
 
-install.packages("sp")                                  "install.packages" = INSTALLARE PACCHETTI
-library("sp")                                                    "library" = RICHIAMARE PACCHETTI INSTALLATI IN PRECEDENZA
+install.packages("sp")                                 
 
-# require(sp) è un altro comando per far partire le librerie o pacchetti
+"install.packages"
+#il comando install.packages serve per installare i pacchetti che mi servono
+#in R quando vado a prendere qualcosa di esterno ad R devo sempre metterlo tra virgolette
 
-data(meuse)                                                         "data" = RICHIAMO GRUPPO DI DATI 
+library("sp")                                                   
+#per richiamare pacchetti installati in precedenza
+#require(sp) è un altro comando per far partire le librerie o pacchetti
 
-head(meuse)                                                        "head" = MOSTRA SOLO IL PRIMO SET DI RIGHE
-
-names(meuse)                                                       "names" = MOSTRA IL NOME DELLE VARIABILI
-
-summary(meuse)                                                   "summary" = MOSTRA MIN,MAX,MEDIA,MEDIANA, 1°/3° QUARTILE
-
-pairs(meuse)                                                       "pairs" = UTILIZZATO PER CORRELAZIONI TRA VARIABILI
-
-pairs(~ cadmium + copper + lead , data = meuse)                          ~ = LA TILDE SIGNIFICA UGUALE
+data(meuse)                                                         
+#richiamare un gruppo di dati 
+head(meuse)                                                       
+#mostra solo il primo set di righe
+names(meuse)                                                       
+#mostra il nome delle variabili
+summary(meuse)                                                  
+#mostra min, max, media, mediana, 1°/3° quartile
+pairs(meuse)                                                      
+#utilizzato per correlazioni tra variabili all'interno di un dataset
+# la tilde "~" significa uguale
+pairs(~ cadmium + copper + lead , data = meuse)                         
+#dico ad R quali variabili voglio rappresentare e da quale dataset (data=meuse)
  
- #  Excercise: cadium copper lead zinc 
+# Excercise: cadium copper lead zinc 
                                                                        
- pairs(meuse[,3:6], col="red")                                        "col" = CAMBIAMENTO COLORE, "pch" = CAMBIAMENTO SIMBOLI GRAFICO
- 
- pairs(meuse[,3:6], col="red", pch=19)                                "[ ]" = SUBSET DEI DATI CHE METTERO AL SUO INTERNO
- 
- pairs(meuse[,3:6], col="red", pch=19 , cex=3, main="Primo pairs")    "cex" = UTILIZZATO PER CAMBIARE LA DIMENSIONE DEI PUNTI
- 
- panel.correlations <- function(x, y, digits=1, prefix="", cex.cor)   "main" = CAMBIAMENTO TITOLO
- 
+ pairs(meuse[,3:6], col="red")                                      
+ #col=cambio colore, pch= cambio simboli grafico
+ pairs(meuse[,3:6], col="red", pch=19)                              
+ #"[ ]" subset dei dati che metterò al suo interno 
+ pairs(meuse[,3:6], col="red", pch=19 , cex=3, main="Primo pairs")    
+ #cex= utilizzato per cambiare la dimensione dei punti
+#main=cambiamento titolo
+
+ #prendiamo 3 pannelli gia fatti dall'esterno
+
+ # panel.correlations <- function(x, y, digits=1, prefix="", cex.cor)  
+
     usr <- par("usr"); on.exit(par(usr))                                                  
     par(usr = c(0, 1, 0, 1))
     r1=cor(x,y,use="pairwise.complete.obs")
@@ -77,16 +88,15 @@ pairs(meuse [,3:6], lower.panel = panel.correlations, upper.panel = panel.smooth
 pairs(meuse[,3:6], lower.panel = panel.smoothing, upper.panel = panel.correlations, diag.panel = panel.histograms)
 
 
-plot(meuse$cadmium , meuse$copper)                                        "$" = COLLEGA UN PEZZO DI CODICE AD UN'ALTRO ES. COLONNA E DATAFRAME
-
-attach(meuse)                                                             "attach" = UTILIZZATO PER ALLEGARE IL DATAFRAME
-
+plot(meuse$cadmium , meuse$copper)                                       
+# $ collega un pezzo di codice ad un'altro es. colonna e dataframe
+attach(meuse) 
+#attach = 
 plot(cadmium,copper, pch=17, col="green", main="primo plot", xlab="cadmio", ylab="rame", cex.lab=2, cex=2))
-
-                                                  "plot" = FUNZIONE CHE PLOTTA I DATI CON LE CARATTERISTICHE INSERITE TRA PARENTESI 
-                                           "xlab","ylab" = CAMBIAMENTO ETICHETTA GRAFICO RISPETTIVAMENTE DELLE ASCISSE E DELLE ORDINATE                                             
-                                               "cex.lab" = UTILIZZATO PER ESAGERARE I PUNTI DELLE ASCISSE E DELLE ORDINATE
-                                               "dev.off" = ELIMINA IL GRAFICO CORRENTE
+#plot, funzione che plotta i dati con le caratteristiche inserite tra parentesi
+#xlab,ylab, cambiamento etichetta grafico rispettivamente delle ascisse e delle ordinate                                     
+#cex.lab, utilizzato per esagerare i punti delle ascisse e delle ordinate
+#dev.off, elimina il grafico corrente
 #############################################################################
 #############################################################################
 CODE 2
