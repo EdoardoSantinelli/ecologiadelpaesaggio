@@ -10,26 +10,26 @@ CODE 1
 install.packages("sp")                                 
 
 "install.packages"
-#il comando install.packages serve per installare i pacchetti che mi servono
-#in R quando vado a prendere qualcosa di esterno ad R devo sempre metterlo tra virgolette
+#ES il comando install.packages serve per installare i pacchetti che mi servono
+#ES in R quando vado a prendere qualcosa di esterno ad R devo sempre metterlo tra virgolette
 
 library("sp")                                                   
-#per richiamare pacchetti installati in precedenza
-#require(sp) è un altro comando per far partire le librerie o pacchetti
+#ES per richiamare pacchetti installati in precedenza
+#ES require(sp) è un altro comando per far partire le librerie o pacchetti
 
 data(meuse)                                                         
-#richiamare un gruppo di dati 
+#ES richiamare un gruppo di dati 
 head(meuse)                                                       
-#mostra solo il primo set di righe
+#ES mostra solo il primo set di righe
 names(meuse)                                                       
-#mostra il nome delle variabili
+#ES mostra il nome delle variabili
 summary(meuse)                                                  
-#mostra min, max, media, mediana, 1°/3° quartile
+#ES mostra min, max, media, mediana, 1°/3° quartile
 pairs(meuse)                                                      
-#utilizzato per correlazioni tra variabili all'interno di un dataset
-# la tilde "~" significa uguale
+#ES utilizzato per correlazioni tra variabili all'interno di un dataset
+#ES la tilde "~" significa uguale
 pairs(~ cadmium + copper + lead , data = meuse)                         
-#dico ad R quali variabili voglio rappresentare e da quale dataset (data=meuse)
+#ES dico ad R quali variabili voglio rappresentare e da quale dataset (data=meuse)
  
 # Excercise: cadium copper lead zinc 
                                                                        
@@ -38,8 +38,8 @@ pairs(~ cadmium + copper + lead , data = meuse)
  pairs(meuse[,3:6], col="red", pch=19)                              
  #"[ ]" subset dei dati che metterò al suo interno 
  pairs(meuse[,3:6], col="red", pch=19 , cex=3, main="Primo pairs")    
- #cex= utilizzato per cambiare la dimensione dei punti
-#main=cambiamento titolo
+#ES cex= utilizzato per cambiare la dimensione dei punti
+#ES main=cambiamento titolo
 
  #prendiamo 3 pannelli gia fatti dall'esterno
 
@@ -89,14 +89,13 @@ pairs(meuse[,3:6], lower.panel = panel.smoothing, upper.panel = panel.correlatio
 
 
 plot(meuse$cadmium , meuse$copper)                                       
-# $ collega un pezzo di codice ad un'altro es. colonna e dataframe
+#ES $ collega un pezzo di codice ad un'altro es. colonna e dataframe
 attach(meuse) 
-#attach = 
+#ES attach = 
 plot(cadmium,copper, pch=17, col="green", main="primo plot", xlab="cadmio", ylab="rame", cex.lab=2, cex=2))
-#plot, funzione che plotta i dati con le caratteristiche inserite tra parentesi
-#xlab,ylab, cambiamento etichetta grafico rispettivamente delle ascisse e delle ordinate                                     
-#cex.lab, utilizzato per esagerare i punti delle ascisse e delle ordinate
-#dev.off, elimina il grafico corrente
+#ES xlab,ylab, cambiamento etichetta grafico rispettivamente delle ascisse e delle ordinate                                     
+#ES cex.lab, utilizzato per esagerare i punti delle ascisse e delle ordinate
+#ES dev.off, elimina il grafico corrente
 
 #############################################################################
 #############################################################################
@@ -105,8 +104,9 @@ CODE 2
 # R spatial : Funzioni Spaziali 
 
 install.packages("sp")
-
-# library() = richiamo pacchetto
+#ES install.packages permette di installare il pacchetto R che comprende le funzioni che mi servono
+# library() 
+#richiamo pacchetto
 library(sp)
 
 # dati
@@ -121,7 +121,7 @@ attach(meuse)
 plot(cadmium,lead,col="red",pch=19,cex=2)
 
 # exercise
-plot di copper e zinco con simbolo triangolo e colore verde
+#ES plot di copper e zinco con simbolo triangolo e colore verde
 
 plot(copper,zinc,pch=17,col="green",cex=2)
 
@@ -131,9 +131,11 @@ plot(copper,zinc,pch=17,col="green",cex=2,xlab="rame",ylab="zinco")
 
 # multiframe o multipanel 
 
-par(mfrow=c(1,2))                                                        "par" = FUNZIONE CHE TI PERMETTE DI VISUALIZZARE PIù GRAFICI E CONFRONTARLI
-plot(cadmium,lead,col="red",pch=19,cex=2)                              "mfrow" = INDICHIAMO COME I GRAFICI DEVONO ESSERE MOSTRATI, N° RIGHE E COLONNE
+par(mfrow=c(1,2))                                                       
+plot(cadmium,lead,col="red",pch=19,cex=2)                             
 plot(copper,zinc,pch=17,col="green",cex=2)
+#par = funzione che ti permette di visualizzare i grafici e confrontarli
+#mfrow = indica come i grafici devono essere mostrati, n°righe e colonne
 
 # invertiamo i grafici riga colonna in colonna riga 
 
@@ -145,17 +147,20 @@ plot(copper,zinc,pch=17,col="green",cex=2)
 
 install.packages("GGally")
 library(GGally)
-ggpairs(meuse[,3:6])                                             
+ggpairs(meuse[,3:6])    
+#ES attenzione alle maiuscole, R è cage sensitive
 
 # spatial 
 
 head(meuse)
 
 coordinates(meuse)=~x+y
+#ES coordinates= dico come si chiamano le variabili al software
 
 plot(meuse)
 
-spplot(meuse,"zinc")                                                "spplot" = FUNZIONE UTILIZZATA PER PLOTTARE SPAZIALMENTE I DATI
+spplot(meuse,"zinc")                                                
+#ES spplot= funzione utilizzata per plottare spazialmente i dati
 
 #####################################################################################
 #####################################################################################
@@ -173,10 +178,11 @@ data(meuse)
 head(meuse)
 
 # Coordinate del dataset                    
-coordinates(meuse)=~x+y                                          "coordinates()" = FUNZIONE CHE SPEIEGA AL SOFTWARE CHE ABBIAMO LE COORDINATE UGUALI A ES. X,Y
+coordinates(meuse)=~x+y                                          
 
 # Spplot dei dati di zinco
 spplot(meuse,"zinc")                                                 
+#ES sppplot dei dati con lo zinco 
 
 # Exercise: spplot dei dati di rame
 head(meuse)
@@ -185,25 +191,40 @@ head(meuse)
 names(meuse)
 spplot(meuse,"copper")                                                
 
-# Bubble                                                               "bubble" = PLOTTA I DATI COME DELLE BOLLE DI DIMENSIONE CHE VARIA A SECONDA DELLA LORO CONCENTRAZIONE, UTILE SE SI HANNO DATI RELATIVI AD ABBONDANZE. 
+# Bubble                                                                
 bubble(meuse,"zinc")
-
+#ES bubble= plotta i dati come delle bolle di dimensione che varia a seconda della loro concentrazione, utile se si hanno dati relativi ad abbondanze.
 # Exercise: bubble del rame, colorato di rosso
 bubble(meuse,"copper",col="red")
+#ES bubble con pallini di colore rosso.
 
 # foraminiferi (Sofia), carbon capture (Marco)
-# array                                                                        
-foram <- c(10, 20, 35, 55, 67, 80)                                      "c" = UTILIZZIAMO C QUANDO DOBBIAMO ELENCARE UNA SERIE DI ELEMENTI
+# array      
+foram <- c(10, 20, 35, 55, 67, 80)    
+#ES c = utilizziamo c quando dobbiamo elencare una serie di elementi
+#ES associo con la freccia a sin il nome della variabile all'ogetto
 carbon <- c(5, 15, 30, 70, 85, 99)
 plot(foram, carbon, col="green", cex=2, pch=19)
 
 # Dati dall'esterno sul covid-19
 
 # MAC
-setwd("/Users/nome_utente/Desktop/lab")                                "setwd" = SET WORKING DIRECTORY, DA INSERIRE OGNI VOLTA CHE VOGLIAMO UTILIZZARE DATI ESTERNI
+setwd("/Users/nome_utente/Desktop/lab")                               
+#ES setwd= set working direcotry, da inserire ogni volta che vogliamo utilizzare dati esterni
+# leggere la tabella    
+#read.table = mi permette di leggere la tabella che ho importato.
 
-# leggere la tabella                                              "read.table" = MI PERMETTE DI LEGGERE LA TABELLA CHE HO IMPORTATO 
 covid <- read.table("covid_agg.csv",head=TRUE)
+# R mi mostrerà i primi dati della tabella 
+
+#  cat     country cases       lat        lon
+#1   1 Afghanistan    21  33.83890  66.026530
+#2   2     Albania    51  41.14596  20.069178
+#3   3     Algeria    49  28.16336   2.632366
+#4   4     Andorra    14  42.54858   1.575688
+#5   5     Antigua     1  17.28014 -61.791128
+#6   6   Argentina    56 -35.37667 -65.167485
+
 
 #####################################################################################
 #####################################################################################
@@ -219,7 +240,7 @@ libray("spatstat")
 
 setwd("/Users/edoardosantinelli/Desktop/lab")
 
-covid <- read.table("covid_agg.csv", head=T)                        "<-" = RINOMINO UN CERTO ELEMENTO COSI DA RICHIAMARLO COL NOME A SINISTRA
+covid <- read.table("covid_agg.csv", head=T)                        
 
 covid <- read.table("view.php.csv", head=T)
 
@@ -230,25 +251,34 @@ covid <- read.table("view.php.csv", head=T)
 
 
 
-                                                                      "las" = FUNZIONE PER CAMBIARE LE LABELS (ETICHETTE)         
+#ES las= funzione per cambiare le labels (etichette)                                                                            
+#ES las=0 è di default e non cambia nulla
+#ES las=1 è orizzontale
+#ES las=2 è perpendicolare agli assi
+#ES las=3 sono tutte verticali
 
-plot(covid$country,covid$cases,las=0)               # parallel
+plot(covid$country,covid$cases,las=0)               
+# parallel
 
-plot(covid$country,covid$cases,las=1)               # horizontal labels
+plot(covid$country,covid$cases,las=1)               
+# horizontal labels
 
-plot(covid$country,covid$cases,las=2)               # perpendicular labels
+plot(covid$country,covid$cases,las=2)              
+# perpendicular labels
 
-plot(covid$country,covid$cases,las=3,cex.axis=0.5)  # vertical labels
+plot(covid$country,covid$cases,las=3,cex.axis=0.5)  
+# vertical labels
 
-
-                                                                  "cex.axis" = FUNZIONE PER DIMINUIRE O AUMENTARE LA DIMENSIONE DELLE LABELS
-
+#ES cex.axis= dunzione per diminuire o aumentare la dimensione delle labels
+                                                                 
 # ggplot2
+#ES ggplot gia installato quindi lo richiamo con library e carico i dati
+library(ggplot2)
 data(mpg)
 head(mpg)
 
 # Data
-                                                                      "aes" = ESTHETICS, TIPO DI GEOMETRIA VISUALIZZATA, PUNTI, LINEE o POLIGONI
+#ES aes= esthetics, tipo di geometria visualizzata, punti, linee o poligoni                    
 # Tipo di geometria  (tipo di visualizzazione)
 ggplot(mpg,aes(x=displ,y=hwy)) + geom_point()
 ggplot(mpg,aes(x=displ,y=hwy)) + geom_line()
@@ -261,8 +291,10 @@ ggplot(covid,aes(x=lon,y=lat,size=cases)) + geom_point()
 # Density 
 # Create dataset for spatstat
 covid <- ppp (lon,lat, c(-180,180), c(-90,90))
+#ES density= utlizzato per plottare un grafico di densità
+d <- density(covid)   
+#ES ho associato alla densità il nome d
 
-d <- density(covid)                                                  "density" = UTILIZZATO PER PLOTTARE UN GRAFICO DI DENSITà 
 plot(d)
 points(covid)
 
@@ -273,6 +305,7 @@ load("point_pattern_Rdata")
 ls()
 
 library(spatstat)
+#ES perchè gia installato in precedenza
 
 plot(d)    
                                                              "colorRampPalette" = UTILIZZATO PER CAMBIARE I COLORI DELLE DIVERSE DENSITà
