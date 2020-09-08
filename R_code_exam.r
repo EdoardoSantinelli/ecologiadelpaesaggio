@@ -475,14 +475,16 @@ CODE 5
 # Codice R per analisi di immagini satellitari 
 
 # packages: raster
+#ES installo il pacchetto raster o se gia installato lo richiamo con library
 
 install.packages("raster") o library(raster)
 
 setwd("/Users/edoardosantinelli/Desktop/lab")
-
+#ES associamo la funzione brick e il nome del file mediante la freccia a sin per portare all'interno di R un'immagine satellitare
 p224r63_2011 <- brick("p224r63_2011_masked.grd")
 
 plot(p224r63_2011)
+#ES la rinominiamo aggiungendo l'anno
 
 # day 2
 
@@ -491,9 +493,19 @@ setwd("/Users/edoardosantinelli/Desktop/lab")
 load("teleril.RData")
  
 ls()
+#ES con ls() vedo cosa contiene il mio file 
 
 plot(p224r63_2011)
+#ESsi vedono le sigle a quali bande corrispondono secondo la legenda standard di R
+# B1: blue 
+# B2: green
+# B3: red
+# B4: near infrared (nir)
+# B5: medium infrared
+# B6: thermal infrared
+# B7: medium infrared
 
+#ES riplotto con la colorRamp Palette scelta
 cl <- colorRampPalette(c('black','grey','light grey'))(100) #
 
 plot(p224r63_2011, col=cl)
@@ -503,24 +515,24 @@ cllow <- colorRampPalette(c('black','grey','light grey'))(5)
 
 plot(p224r63_2011, col=cllow)
 
-# 
-
 names(p224r63_2011)
 # [1] "B1_sre" "B2_sre" "B3_sre" "B4_sre" "B5_sre" "B6_bt"  "B7_sre"
+#ES vedo i vari nomi 
 
 clb <- colorRampPalette(c('dark blue','blue','light blue'))(100)
 plot(p224r63_2011$B1_sre, col=clb)
-#                                                        attach(dataframe) non funziona con il pacchetto raster
-#                                                       simbolo che lega la colonna (la banda) al dataset (immagine satellitare) : $
+#ES attach(dataframe) non funziona con il pacchetto raster
+#ES simbolo che lega la colonna (la banda) al dataset (immagine satellitare) : $
   
 # Exercise
 
 clnir <- colorRampPalette(c('red','orange','yellow')
 plot(p224r63_2011$B4_sre, col=clnir) 
   
-# Multiframe                                                      METTIAMO IN RISALTO IL FRAME CHE CI INTERESSA (ES. BLU, VERDE, ROSSO E INFRAROSSO)
-                          
- par(mfrow=c(2,2))
+# Multiframe                                                     
+#ES mettiamo in risalto il frame che ci niteressa: blu, verde, rosso e infrarosso                          
+ 
+par(mfrow=c(2,2))
 # Blue
 clb <- colorRampPalette(c('dark blue','blue','light blue'))(100)
 plot(p224r63_2011$B1_sre, col=clb)
@@ -536,24 +548,24 @@ clnir <- colorRampPalette(c('red','orange','yellow')) (100)
 plot(p224r63_2011$B4_sre, col=clnir) 
 
 dev.off()           
-                          
+#ES chiudo tutti i grafici correnti                           
+
 # natural colours
+#ES plottiamo come vedrebbe l'occhio umano 
 # 3 componenti: R G B
 # 3 bands: R = banda del rosso, G = banda del verde , B = banda del blu                        
  plotRGB(p224r63_2011,r=3,g=2,b=1)
     
-
-                          
-                          
-                          
+                         
  #rgb non viene letto ( maiuscolo)                       
 plotRGB(p224r63_2011, r=3, g=2, b=1, stretch="Lin")
-                          
+#ES uso stretch per aumentare la rislouzione dell'immagine
 # nir
 # false colours
 plotRGB(p224r63_2011, r=4, g=3, b=2, stretch="Lin")
  
- # Salvataggio                                                              "pdf()" = SALVATAGGIO GRAFICO IN PDF
+ # Salvataggio                                   
+#ES pdf() = salvataggio grafico in pdf
 pdf("primografico.pdf") 
                           
                                                     
@@ -598,7 +610,7 @@ clnir <- colorRampPalette(c('red','orange','yellow')) (100)
 plot(p224r63_1988$B4_sre, col=clnir) 
                           
                           
-dev.off()                                                         ELIMINO IL GRAFICO CHE STO VISUALIZZANDO
+dev.off()                                                         
 
 plotRGB(p224r63_1988, r=3, g=2, b=1, stretch="Lin")                          
                           
@@ -615,17 +627,21 @@ plotRGB(p224r63_2011, r=4, g=3, b=2, stretch="Lin", main="2011")
                           
                           
 # spectral indices
+#ES calcoliamo l indice DVI sottraendo la banda del red alla banda dell'infrarosso per ogni pixel
 #DVI1988 = nir1988-red1988                          
 dvi1988 <- p224r63_1988$B4_sre - p224r63_1988$b3_sre
 plot(dvi1988)
                        
-  #excersie : calculate dvi for 20111                        
+  #excersie : calculate dvi for 20111  
+#ES stesso plot anche per il 2011
+
 dvi2011 <- p224r63_2011$B4_sre - p224r63_2011$B3_sre
                           clo
 cldvi <- colorRampPalette(c('light blue','light green','green'))(100)
 plot(dvi2011, col=cldvi)  
                           
-# multitemporal analysis (analisi multitemporale dei cambiamenti del paesaggio)
+# multitemporal analysis 
+#ES analisi multitemporale dei cambiamenti del paesaggio)
                           
 difdvi <- dvi2011-dvi1988 
                           
@@ -643,19 +659,17 @@ plot(difdvi, col=cldifdvi)
                       
 # Changing the grain (resolution)
                           
-p224r63_2011lr <- aggregate(p224r63_2011, fact=10)                    "FACT" = AUMENTO IL VALORE PER DIMINURIE LA RISOLUZIONE
-                          
+p224r63_2011lr <- aggregate(p224r63_2011, fact=10)        
+#ES FACT = aumento di valore per diminuire la risoluzione
 
-                              
 par(mfrow=c(2,1))
                           
 plotRGB(p224r63_2011, r=4, g=3, b=2, stretch="Lin")
 plotRGB(p224r63_2011lr, r=4, g=3, b=2, stretch="Lin")
                           
  #lower resolution
-                          
+ #ES aumento il fact, diminuisco la risoluzione                         
 p224r63_2011lr50 <- aggregate(p224r63_2011, fact=50)
-                          
                           
 # original 30m -> resampled 1500m                         
 par(mfrow=c(3,1))
@@ -669,9 +683,11 @@ dvi2011lr50 <- p224r63_2011lr50$B4_sre - p224r63_2011lr50$B4_sre
 plot(dvi2011lr50)
 
 # dvi1988 low resolution
+#ES differenza dei due anni con risoluzione 50
+
 dvi1988lr50 <- p224r63_1988lr50$B4_sre - p224r63_1988lr50$B3_sre
 plot(dvi1988lr50) 
-# difdvi low resolution                                              DIFFERENZA DI DUE DVI A BASSA RISOLUZIONE               
+# difdvi low resolution                                                        
 difdvilr50 <- dvi2011lr50 - dvi1988lr50
 plot(difdvilr50,col=cldifdvi)
                           
@@ -685,18 +701,30 @@ plot(difdvilr50, col=cldifdvi)
 CODE 6
 
 # Codice R per analisi di immagini satellitari 
-
+#ES setto la WD, carico il pacchetto raster e se non l'ho gia installato installo e richiamo RStoolbox
 # packages: raster
 
 install.packages("raster") o library(raster)
 
 setwd("/Users/edoardosantinelli/Desktop/lab")
+#ES importo elementi da IOL medinate la funzione brick e lo metto tra virgolette perchè esterno
 
 p224r63_2011 <- brick("p224r63_2011_masked.grd")
 
-plot(p224r63_2011)
+plotRGB(p224r63_2011, r=4, g=3, b=2, stretch="Lin")
+#plotto con le bande riferite ai colori RGB
 
-# day 2
+p224r63_2011c <- unsuperClass(p224r63_2011, nClasses=4)
+#ES suddivisione in 4 classi (nClasses=4) con la funzione unsuperclass 
+
+p224r63_2011c <- unsuperClass(p224r63_2011, nClasses=4)
+
+plot(p224r63_2011c$map)
+#ES seguo il plot che mi restituisce la mappa con le 4 classi
+clclass <- colorRampPalette(c('red', 'green', 'blue', 'black'))(100)
+#ES associo una colorRampPalette
+plot(p224r63_2011c$map, col=clclass)
+
 
 setwd("/Users/edoardosantinelli/Desktop/lab")
 
@@ -883,7 +911,7 @@ plot(dvi2011lr50)
 # dvi1988 low resolution
 dvi1988lr50 <- p224r63_1988lr50$B4_sre - p224r63_1988lr50$B3_sre
 plot(dvi1988lr50) 
-# difdvi low resolution                                            (differenza dei due dvi a bassa risoluzione)               
+# difdvi low resolution                                            
 difdvilr50 <- dvi2011lr50 - dvi1988lr50
 plot(difdvilr50,col=cldifdvi)
                           
@@ -902,11 +930,13 @@ CODE 7
 
 setwd("/Users/edoardosantinelli/Desktop/lab")
 library(raster)
-
+#ES setto la WD richiamo il pacchetto raster e con brick carico le immagini (dataset)
+#ES associo le immagini a due nomi
 defor1 <- brick("defor1.png")
 defor2 <- brick("defor2.png")
 
 # names: defor1_.1 = NIR ,  defof1_.2= red , defor1_.3= green
+#ES sono i nomi delle bande, tramite plotRGB  associo le tre bande di riferimento al colore rgb che voglio: mettiamo la nir con il red
 
 plotRGB(defor1,r=1, g=2, b=3, stretch="Lin")
 
@@ -914,15 +944,15 @@ plotRGB(defor1,r=1, g=2, b=3, stretch="Lin")
 
 plotRGB(defor2, r=1, g=2, b=3, stretch="Lin")
 
+#ES ora classifichiamo in 2 classi per dividere la foresta dal resto tramite unsuperclass e per farlo carico la library giusta
+
 par(mfrow=c(2,1))
 plotRGB(defor1,r=1, g=2, b=3, stretch="Lin")
 plotRGB(defor2, r=1, g=2, b=3, stretch="Lin")
 
-
 library(RStoolbox)
 
-
-d1c <- unsuperClass(defor1, nClasses=2)                     "unsuperClass" = CLASSIFICAZIONE NON SUPERVISIONATA; NON DIAMO INPUT AL PC SU QUALI ZONE SONO FORESTA O MENO.
+d1c <- unsuperClass(defor1, nClasses=2)                    
 
 plot(d1c$map)
 cl <- colorRampPalette(c('black','green'))(100) # 
@@ -940,11 +970,13 @@ par(mfrow=c(2,1))
 plot(d1c$map, col=cl)
 plot(d2c$map, col=cl)
 
-freq(d1c$map)                                       "freq" = MI INDICA LA FREQUENZA DEI VARI DATI INSERITI NEL GRAFICO, DA QUI POSSIAMO CALCOLARE LE PERCENTUALI.
+freq(d1c$map)                         
+#ES freq = mi indica la frequenza dei vari dati inseriti nel grafico, da qui possiamo calcolare le percentuali.
 # aree aperte =35213
 # foresta = 306079
 
 totd1 <- 306079 + 35213
+#ES totale celle, ora calcolo le percentuali
 totd1
 
 percent1 <- freq(d1c$map) * 100 / 341292
@@ -961,7 +993,7 @@ percent2
 # percentuali
 # foreste 52,42
 # aree aperte 47,58
-
+#ES creo un output cioè un dataframe con il tipo di landcover, la percentuale prima e dopo il disboscamento
 cover <- c("Agriculture","Forest")
 before <- c(10.4, 89.6)
 after <- c(47.58, 52.42)
@@ -974,19 +1006,20 @@ set
 library(raster)
 load("defor.RData")
 
-
+#ES riplotto le immagini dei due anni della scorsa lezione
 par(mfrow=c(1,2))
 cl <- colorRampPalette(c('black','green'))(100) # 
 plot(d1c$map, col=cl)
 plot(d2c$map, col=cl)
 
 library(ggplot2)
+#ES plotto con percentuali a confronto prima della deforestazione con ggplot
 
 ggplot(output, aes(x=cover, y=before, color=cover)) +
 geom_bar(stat="identity", fill="white")
 
 # excercise plot the histograms of the land cover after deforastation
-
+#ES e dopo la deforestazione
 ggplot(output, aes(x=cover, y=after, color=cover)) +
 geom_bar(stat="identity", fill="white")
 ####
@@ -1003,8 +1036,8 @@ geom_bar(stat="identity", fill="white")
 grafico2 <- ggplot(output, aes(x=cover, y=after, color=cover)) +
 geom_bar(stat="identity", fill="white")
 
-grid.arrange(grafico1, grafico2, nrow=1)                          "grid.arrange" = PLOTTA I DUE GRAFICI NELLA STESSA SCHERMATA, CON nrow decido se su una stessa riga 
-
+grid.arrange(grafico1, grafico2, nrow=1)                          
+#ES grid.arrange = plotta i due grafici nella stessa schermata, con nrow decido se sulla stessa riga
 
 library(ggplot2)
 cover <- c("Agriculture","Forest")
@@ -1042,6 +1075,7 @@ CODE 8
 
 ###### R code for analysin NO2 data from ESA, January to March 2020
 set
+#ES setto la WD, carico il paccchetto raster, rinomino gli elementi che importo
 
 library(raster)
 
@@ -1059,6 +1093,7 @@ EN11 <- raster("EN_0011.png")
 EN12 <- raster("EN_0012.png")
 EN13 <- raster("EN_0013.png")
 
+#ES plotto cambiano i colori
 cl <- colorRampPalette(c('red','orange','yellow'))(100) # 
 plot(EN01, col=cl)
 plot(EN13, col=cl)
@@ -1067,10 +1102,11 @@ par(mfrow=c(1,2))
 plot(EN01, col=cl)
 plot(EN13, col=cl)
 
+#ES differenza tra le due immagini
 difno2 <- EN13 - EN01
 cldif <- colorRampPalette(c('blue','black','yellow'))(100) #
 plot(difno2, col=cldif)
-
+#ES plotto tutte le immagini, o uso par ma piu lento soprattutto se ho molti elementi o creo uno stack
 par(mfrow=c(4,4))
 plot(EN01, col=cl)
 plot(EN02, col=cl)
@@ -1093,17 +1129,24 @@ setwd("/Users/edoardosantinelli/Desktop/lab")
 load("EN.RData")
 
 setwd("/Users/edoardosantinelli/Desktop/lab/esa_no2")
+#ES utilizzo il metodo tramite lo stack
+EN <- stack(EN01,EN02,EN03,EN04,EN05,EN06,EN07,EN08,EN09,EN10,EN11,EN12,EN13) 
+#ES stack mi ha imballato le 13 immagini in una sola
 
+rlist <- list.files(pattern=".png")                       
+#ES creo una cartella
 
-rlist <- list.files(pattern=".png")                        CREO UNA CARTELLA 
+lapply(rlist, raster)        
+#ES lapply = faccio una lista dei files
 
-lapply(rlist, raster)                                      lapply = FACCIO UNA LISTA DI FILES
+listafinale <- lapply(rlist, raster)                       
+#ES importo la lista
 
-listafinale <- lapply(rlist, raster)                       IMPORTO LA LISTA
-
-EN <- stack(listafinale)                                   FACCIO UNO STACK DELLE BANDE IMPORTANTE IN UNA SINGOLA IMMAGINE SU R
+EN <- stack(listafinale)                                   
+#ES faccio uno stack delle bande importate in una singola immagine su R
 
 cl <- colorRampPalette(c('red','orange','yellow'))(100)
+#ES aggiungo i coloti e plotto 
 
 plot(EN, col=cl)
 
@@ -1116,10 +1159,20 @@ rlist <- list.files(pattern=".png")
 
 listafinale <- lapply(rlist, raster)
 EN <- stack(listafinale)
+#ES voglio fare la differenza tra la prima e l'ultima
 difEN <- EN$EN_0013 - EN$EN_0001
 
 cld <- colorRampPalette(c('blue','white','red'))(100) # 
 plot(difEN, col=cld)
+
+boxplot(EN)
+#ES grafico dove si vede in un certo senso la distribuzione 
+boxplot(EN, horizontal=T) 
+#ES lo metto orrizontale
+boxplot(EN, horizontal=T,outline=F) 
+#ES piu visibile il calo dei valori massimi 
+boxplot(EN, horizontal=T,outline=F,axes=T)
+#ES aggiungo anche gli assi
 
 #####################################################################################
 #####################################################################################
