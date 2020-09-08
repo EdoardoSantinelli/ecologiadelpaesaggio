@@ -134,8 +134,8 @@ plot(copper,zinc,pch=17,col="green",cex=2,xlab="rame",ylab="zinco")
 par(mfrow=c(1,2))                                                       
 plot(cadmium,lead,col="red",pch=19,cex=2)                             
 plot(copper,zinc,pch=17,col="green",cex=2)
-#par = funzione che ti permette di visualizzare i grafici e confrontarli
-#mfrow = indica come i grafici devono essere mostrati, n°righe e colonne
+#ES par = funzione che ti permette di visualizzare i grafici e confrontarli
+#ES mfrow = indica come i grafici devono essere mostrati, n°righe e colonne
 
 # invertiamo i grafici riga colonna in colonna riga 
 
@@ -285,6 +285,7 @@ ggplot(mpg,aes(x=displ,y=hwy)) + geom_line()
 ggplot(mpg,aes(x=displ,y=hwy)) + geom_polygon()
 
 attach(covid)
+#ES il comando attach permette di richiamare direttamente un elemento del dataframe
 # ggplot di covid
 ggplot(covid,aes(x=lon,y=lat,size=cases)) + geom_point()
 
@@ -308,10 +309,12 @@ library(spatstat)
 #ES perchè gia installato in precedenza
 
 plot(d)    
-                                                             "colorRampPalette" = UTILIZZATO PER CAMBIARE I COLORI DELLE DIVERSE DENSITà
+#ES colorRampPalette = utilizzato per cambiare i colori delle diverse densità.
 # cambiare i colori delle densità (palette), creiamo l'oggetto cl che è una gamma di colori
 
-cl <- colorRampPalette(c('yellow','orange','red')) (100)         "(100)" = QUANTI LIVELLI USIAMO TRA UN COLORE E L'ALTRO DELLA PALETTE
+cl <- colorRampPalette(c('yellow','orange','red')) (100)
+#ES (100) = quanti livelli usiamo tra un colore e l'altro della palette.
+#ES diamo un nome alla nostra colorRampPalette e poi la plottiamo con col=nome dato
 plot(d,col=cl)
 
 # excercise
@@ -320,6 +323,8 @@ cl <- colorRampPalette(c('green','yellow','orange','red','blue')) (50)
 plot(d,col=cl)
 
 points(covids)
+#ES aggiungiamo i confini degli stati
+
 coastlines <- readOGR("ne_10m_coastline.shp")                
 
 install.packages("rgdal")
@@ -328,6 +333,7 @@ library(rgdal)
 coastlines <- readOGR("ne_10m_coastline.shp")
 
 plot(coastlines, add=T)
+#ES plotdella mappa di densita con nuovi colori e aggiunta delle coastlines
 
 #### excercise: caricare il workspace point_pattern.Rdata e creare un grafico della mappa di densità
 
@@ -348,13 +354,15 @@ plot(coastlines, add=T)
 # interpolazione
 
 head(covid)
-marks(covids) <- covid$cases                                 "marks" = FUNZIONE UTILIZZATA PER ASSOCIARE UN VALORE A UNA COLONNA
+marks(covids) <- covid$cases     
+# marks = funzione utilizzata per associare un valore a una colonna
 
 s <- Smooth(covids) 
+#ES eliminiamo lo smoothing dei valori numerici
 plot(s)
 
 # Exercise: plot(s) with points and coastlines
-
+#ES plot finale con colore titolo e coastlines
 cl5 <- colorRampPalette(c('cyan', 'purple', 'red')) (200) 
 plot(s, col=cl5, main="density")
 points(covids)
@@ -381,6 +389,7 @@ points(covids)
 coastlines <- readOGR("ne_10m_coastline.shp")
 plot(coastlines, add=T)
 
+#ES altro esempio di grafici di densità e interpolazione
 
 ## San Marino
 
