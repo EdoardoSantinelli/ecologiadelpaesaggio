@@ -1242,6 +1242,8 @@ install.packages("igraph")
 #ES install.packages("igraph"
 library(igraph)
 library(ggplot)
+#ES mi serve ggplot per ilgrafico finale
+
 #ES rinomino i dati
 d1c <- raster("d1c.tif)
 d2c <- raster("d2c.tif")
@@ -1310,7 +1312,7 @@ lapply(rlist, raster)
 
 listaimmagini <- lapply(rlist, raster)
 
-SN <- stack(listaimmagini)                                   stack = serie multitemporale creata
+SN <- stack(listaimmagini)                                  
 
 cl <- colorRampPalette(c('blue','light blue','white'))(100)
 
@@ -1319,24 +1321,30 @@ plot(SN, col=cl)
 # zoom 
 
 plot(SN$snow2010r, col=cl)
+#ES così con il $ lego la mia immagine al dataset che voglio plottare
 
-ext <- c( -180, 180, -90, 90)                                 estensione totale immagine
+ext <- c( -180, 180, -90, 90)                               
+#ES estensione totale immagine
 
+extension <- c(6, 18, 40, 50)                                 
+#ES estensione a nostra discrezione zoomando una zona
 
-extension <- c(6, 18, 40, 50)                                 estensione a nostra discrezione zoomando una zona
 zoom(SN$snow2010r, ext=extension)
+#ES immettiamo le nostre coordinate
 
 extension <- c(6, 20, 35, 50)
 zoom(SN$snow2010r, ext=extension)
 
-zoom(SN$snow2010r, ext=drawExtent())                          r aspetta un rettangolo disegnato da noi per zoommare
+zoom(SN$snow2010r, ext=drawExtent())                         
+#ES R aspetta un rettangolo disegnato da noi per zoommare
  
-#crop                                                         senza ext= non è solo uno zoom ma un immagine nuova ritagliata daalla precedente
+#crop                                                         
+#ES senza ext= non è solo uno zoom ma un immagine nuova ritagliata daalla precedente
 
 extension <- c(6, 20, 35, 50)
 snow2010r.italy <- crop(SN$snow2010r, extension)
 plot(snow2010r.italy, col=cl)
-
+#ES uso crop e gli assoccio un nome, plotto
 
 
 #excercise crop the italy extent on the whole stack of snow layers
@@ -1345,11 +1353,9 @@ extension <- c(6, 20, 35, 50)
 snowitaly <- crop(SN, extension)
 plot(snowitaly, col=cl)
 
-mettiamo le legende uguali  zlim=
-
 plot(snowitaly, col=cl, zlim=(c(20, 200))
 
-facciamo un boxplot 
+#ES facciamo un boxplot 
 boxplot(snowitaly, horizontal= T, vertical= F)
 
 
