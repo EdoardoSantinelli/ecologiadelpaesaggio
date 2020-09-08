@@ -1179,15 +1179,11 @@ boxplot(EN, horizontal=T,outline=F,axes=T)
 CODE 9
 
 setwd("/Users/edoardosantinelli/Desktop/lab")
-
+#ES richiamo le librerie utili
 install.packages("ncdf4")
-
 library(ncdf4)
 library(raster)
-
-importare immagini : raster(un singolo livello) , brick , 
-
-
+#ES porto i dati(con la funzione raster) da lab che ho scaricato da copernicus e messo nella cartella e rinomino
 snowmay <- raster("snow")
 
  cl <- colorRampPalette(c("darkblue","blue","light blue"))(100))
@@ -1199,12 +1195,14 @@ plot(snowmay, col=cl)
 setwd("/Users/edoardosantinelli/Desktop/lab/snow1")
 
 rlist <- list.files(pattern=".tif")
-lapply(rlist, raster)                                               importazione dei singoli file tramite la funzione r applicata a tutti i file contemporaneamete mediante la funzione lapply
+lapply(rlist, raster)                                               
+#ES importazione dei singoli file tramite la funzione r applicata a tutti i file contemporaneamete mediante la funzione lapply
 list_rast <- lapply(rlist, raster)
 snow.multitemp <- stack(list_rast)
 plot(snow.multitemp,col=cl)
 
 par(mfrow=c(1,2))
+#ES confronto tra anni 2000 w 2020
 
 plot(snow.multitemp$snow2000r, col=cl)
 plot(snow.multitemp$snow2020r, col=cl)
@@ -1213,9 +1211,9 @@ par(mfrow=c(1,2))
 
 plot(snow.multitemp$snow2000r, col=cl, zlim=c(0,250))
 plot(snow.multitemp$snow2020r, col=cl, zlim=c(0,250))
+#ES uniamo il limite tra le due immagini tramite la funzione zlim=c con i limiti tra parentesi
 
-
-differenza nella neve difsnow
+#differenza nella neve difsnow
 
 difsnow = snow.multitemp$snow2020r - snow.multitemp$snow2000r
 
@@ -1224,7 +1222,7 @@ cldiff <- colorRampPalette(c('blue','white','red'))(100)
 plot(difsnow, col=cldiff)
 
 #### prediction 
-scaricare il file nella cartella snow1 da IOL
+#ES scaricare il file nella cartella snow1 da IOL
 
 source("prediction.r")
 
@@ -1240,19 +1238,26 @@ CODE 10
 setwd("/Users/edoardosantinelli/Desktop/lab")
 
 library(raster)
-
+install.packages("igraph")
+#ES install.packages("igraph"
+library(igraph)
+library(ggplot)
+#ES rinomino i dati
 d1c <- raster("d1c.tif)
 d2c <- raster("d2c.tif")
 par(mfrow=c(1,2))
 cl <- colorRampPalette(c("green","black"))(100)
+#ES ho messo nero la non foreste e verdela foresta
 plot(d1c,col=cl)
 plot(d2c,col=cl)
+#ES inverto i colori dell'array
 par(mfrow=c(1,2))
 cl <- colorRampPalette(c('black','green'))(100) #
 plot(d1c,col=cl)
 plot(d2c,col=cl)
  
-                                                         funzione "CBIND": elimina alcuni valori es, agricoltura , si metonono come valori nulla ed estraiamo la foresta
+                                                        
+#ES funzione cbind: elimina alcuni valori es, agricoltura , si metonono come valori nulla ed estraiamo la foresta
 # forest: class2 , agricolture class 1
 d1c.for <- reclassify(d1c, cbind(1,NA))
 cl <- colorRampPalette(c('black','green'))(100) #
@@ -1269,7 +1274,7 @@ d1c.for.patches <- clump(d1c.for)
 d2c.for.patches <- clump(d2c.for)
 # d1c.for.patches <- raster("d1c.for.pacthes.tif")
 # d2c.for.patches <- raster("d2c.for.pacthes.tif")
-excercise plottare entrambe le mappe una accanto all'altra
+#excercise plottare entrambe le mappe una accanto all'altra
 par(mfrow=c(1,2))
 plot(d1c.for.patches)
 plot(d2c.for.patches)
@@ -1281,9 +1286,12 @@ plot(d2c.for.patches, col=clp)
 # max patches d2 1212
 # plot results:
 time <- c("Before deforestation","After deforestation")
-npatches <- c(301,1212)                                        IL NUMERO DI PATCHES é DATO DAL MAX DI UNA E IL MAX DELL' ALTRA
-output <- data.frame(time,npatches)                            HO CORRELATO LE PATCH PRE E POST DEFORESTAZIONE
+npatches <- c(301,1212)                                        
+#ES il numero di patches è dato dal max di una e il max dell'altra
+output <- data.frame(time,npatches)                            
+#ES ho correlato le patch pre e post deforestazione
 attach(output)
+ggplot(output, aes(x=time, y=npatches, color="red")) + geom_bar(stat="identity", fill="white")
 
 #####################################################################################
 #####################################################################################
