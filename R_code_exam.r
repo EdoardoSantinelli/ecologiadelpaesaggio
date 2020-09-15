@@ -342,8 +342,8 @@ library(rgdal) # for the coastlines
 
  setwd("~/lab/")
 load("point_pattern.RData")
-ls()                                                        "ls()" = LISTA 
-
+ls()                                                       
+#ES ls()= lista
  cl5 <- colorRampPalette(c('cyan', 'purple', 'red')) (200) 
 plot(d, col=cl5, main="density")
 points(covids)
